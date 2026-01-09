@@ -170,6 +170,72 @@
             background: rgba(255,255,255,0.1);
         }
 
+        /* Navigation Styles */
+        nav {
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            justify-content: flex-start;
+            gap: 3rem;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            color: #1a1a1a;
+            text-decoration: none;
+            padding: 1.2rem 0;
+            display: block;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: -0.3px;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #666;
+        }
+
+        .nav-menu a.active {
+            color: #000;
+            border-bottom: 2px solid #000;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 0.5rem;
+            margin: 0 auto;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #000;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+        
         /* Feature Section */
         .feature-section {
             padding: 5rem 0;
@@ -447,9 +513,14 @@
         </div>
         <nav>
             <div class="container">
+                <div class="hamburger" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
                 <ul class="nav-menu">
                     <li><a href="/" class="active">Home</a></li>
-                    <li><a href="/useful-information/">Useful Information</a></li>
+                    <li><a href="/background-information/">Background Information</a></li>
                     <li><a href="/korean-choral-compositions/">Korean Choral Compositions</a></li>
                     <li><a href="/send-your-inquiry/">Send Your Inquiry</a></li>
                 </ul>
