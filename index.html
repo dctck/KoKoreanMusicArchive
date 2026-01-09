@@ -642,5 +642,74 @@
             </div>
         </div>
     </footer>
+    <script>
+        // Toggle hamburger menu
+        function toggleMenu() {
+            const menu = document.querySelector('.nav-menu');
+            const hamburger = document.querySelector('.hamburger');
+            menu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        // Toggle expandable cards
+        function toggleCard(card) {
+            card.classList.toggle('expanded');
+        }
+
+        // Sidebar active state
+        function setActive(event) {
+            event.preventDefault();
+            const links = document.querySelectorAll('.sidebar-nav a');
+            links.forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const targetId = event.target.getAttribute('href');
+            document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Search papers
+        function searchPapers(query) {
+            const papers = document.querySelectorAll('.paper-item');
+            const searchLower = query.toLowerCase();
+            
+            papers.forEach(paper => {
+                const title = paper.querySelector('h3').textContent.toLowerCase();
+                const meta = paper.querySelector('.paper-meta').textContent.toLowerCase();
+                const description = paper.querySelector('p:not(.paper-meta)').textContent.toLowerCase();
+                const keywords = paper.getAttribute('data-keywords').toLowerCase();
+                
+                if (title.includes(searchLower) || 
+                    meta.includes(searchLower) || 
+                    description.includes(searchLower) || 
+                    keywords.includes(searchLower)) {
+                    paper.style.display = 'block';
+                } else {
+                    paper.style.display = 'none';
+                }
+            });
+        }
+
+        // Highlight active section in sidebar on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.content-section');
+            const navLinks = document.querySelectorAll('.sidebar-nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
