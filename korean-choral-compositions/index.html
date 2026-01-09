@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Korean Choral Compositions - Korean Choral Music Archive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+        }
+
+        h1, h2, h3, h4, h5, h6, .nav-menu {
+            font-family: 'Onest', sans-serif;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Header Styles */
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .logo h1 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #000;
+            letter-spacing: -0.5px;
+        }
+
+        .logo p {
+            font-size: 0.75rem;
+            color: #666;
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            margin-top: 0.1rem;
+        }
+
+        /* Navigation Styles */
+        nav {
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            justify-content: flex-start;
+            gap: 3rem;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            color: #1a1a1a;
+            text-decoration: none;
+            padding: 1.2rem 0;
+            display: block;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: -0.3px;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #666;
+        }
+
+        .nav-menu a.active {
+            color: #000;
+            border-bottom: 2px solid #000;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 0.5rem;
+            margin: 0 auto;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #000;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: #000;
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Composer List View */
+        .composer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .composer-thumbnail {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+
+        .composer-thumbnail:hover {
+            border-color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .composer-image {
+            width: 100%;
+            height: 320px;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-style: italic;
+            overflow: hidden;
+        }
+
+        .composer-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .composer-info h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.3px;
+        }
+
+        .composer-info .korean-name {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        /* Composer Detail View */
+        .composer-detail {
+            display: none;
+        }
+
+        .composer-detail.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .back-button {
+            background: #000;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            cursor: pointer;
+            font-family: 'Onest', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background: #333;
+        }
+
+        .composer-header {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            align-items: start;
+        }
+
+        .composer-portrait {
+            width: 200px;
+            height: 250px;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-style: italic;
+            border: 1px solid #d0d0d0;
+        }
+
+        .composer-title-section h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .composer-social {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+
+        .social-icon {
+            color: #000;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-icon:hover {
+            color: #666;
+        }
+
+        .social-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .share-button {
+            background: #000;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            cursor: pointer;
+            font-family: 'Onest', sans-serif;
+            font-weight: 500;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s;
+        }
+
+        .share-button:hover {
+            background: #333;
+        }
+
+        .composer-bio {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .composer-bio p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        /* Compositions Table */
+        .compositions-section {
+            margin-top: 3rem;
+        }
+
+        .compositions-section h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .compositions-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .composition-card {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            padding: 1.5rem;
+            transition: border-color 0.3s;
+        }
+
+        .composition-card:hover {
+            border-color: #000;
+        }
+
+        .composition-header {
+            margin-bottom: 1rem;
+        }
+
+        .composition-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #000;
+        }
+
+        .composition-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.3rem;
+            font-family: 'Onest', sans-serif;
+        }
+
+        .meta-value {
+            font-size: 0.95rem;
+            color: #333;
+        }
+
+        .performance-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.3rem;
+        }
+
+        .performance-link {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: #000;
+            color: white;
+            text-decoration: none;
+            font-family: 'Onest', sans-serif;
+            font-weight: 500;
+            font-size: 0.8rem;
+            transition: background-color 0.3s;
+        }
+
+        .performance-link:hover {
+            background: #333;
+        }
+
+        .composition-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .comp-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border: 1px solid #000;
+            color: #000;
+            text-decoration: none;
+            font-family: 'Onest', sans-serif;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .comp-link:hover {
+            background: #000;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: #ccc;
+            padding: 2.5rem 0;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-content p {
+            margin: 0.3rem 0;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 30px;
+            }
+
+            .composer-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .header-top {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav {
+                border-top: none;
+            }
+
+            nav .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                gap: 0;
+                background: #fafafa;
+                border: 1px solid #e0e0e0;
+                margin-top: 0.5rem;
+                text-align: center;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu li {
+                width: 100%;
+            }
+
+            .nav-menu a {
+                padding: 1rem;
+                border-bottom: 1px solid #e0e0e0;
+            }
+
+            .nav-menu li:last-child a {
+                border-bottom: none;
+            }
+
+            .nav-menu a.active {
+                border-bottom: 1px solid #e0e0e0;
+                background: #f0f0f0;
+            }
+
+            .nav-menu li:last-child a.active {
+                border-bottom: none;
+            }
+
+            .page-header h2 {
+                font-size: 2rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+
+            .composer-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .composer-header {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .composer-portrait {
+                margin: 0 auto;
+            }
+
+            .composer-social {
+                justify-content: center;
+            }
+
+            .composition-meta {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+
+            .composition-links {
+                flex-direction: column;
+            }
+
+            .comp-link {
+                text-align: center;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <a href="/" class="logo">
+                    <div class="logo-icon">KCM</div>
+                    <div>
+                        <h1>Korean Choral Music Archive</h1>
+                        <p>operated by stevekomusic.com</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <div class="hamburger" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/background-information/">Background Information</a></li>
+                    <li><a href="/korean-choral-compositions/" class="active">Korean Choral Compositions</a></li>
+                    <li><a href="/send-your-inquiry/">Send Your Inquiry</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h2>Korean Choral Compositions</h2>
+                <p>A List of Selected Composers<br>Please click each composer for composer's page.</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- Composer Grid View (Auto-generated from composersData) -->
+            <div id="composer-list" class="composer-grid">
+                <!-- Composers will be generated here by JavaScript -->
+            </div>
+
+            <!-- Composer Detail View (Auto-generated) -->
+            <div id="composer-detail-container" class="composer-detail">
+                <!-- Composer details will be generated here by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <p>&copy; 2024 Website Copyright reserved to stevekomusic.com</p>
+                    <p>koreanchoralmusic.com</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                    <a href="/send-your-inquiry/">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ============================================================
+        // COMPOSER DATA - ADD NEW COMPOSERS HERE
+        // ============================================================
+        const composersData = {
+            'cho-hyeyoung': {
+                nameEn: 'Cho, HyeYoung',
+                nameKo: '조혜영',
+                birthYear: 'b. 1969',
+                portraitUrl: '', // Leave empty for placeholder, or add image URL
+                socialMedia: {
+                    website: '#',
+                    instagram: '#',
+                    facebook: '#',
+                    linkedin: '#',
+                    youtube: '#'
+                },
+                bio: [
+                    "Composer Cho Hye-young, who graduated from the Composition Department and Graduate School of Hanyang University, has been close to choral music since childhood through activities such as church choirs and university amateur choirs. After graduating from university, she worked in various fields such as contemporary music and electronic music, and began to pursue choral composition in earnest since 2006 when she started publishing sacred choral music.",
+                    "In 2009, she received a commission from the National Chorus of Korea, which marked the start of her career as a choral composer. In 2012, she participated in the Choral Composition Symposium hosted by Joseph M. Martin in Atlanta, USA, and won the composition award. In 2014, her commissioned work, 'Te Deum' for large orchestra, was performed at the opening concert of the World Symposium on Choral Music (WSCM) held in Seoul.",
+                    "Her works have been performed at the Barcelona World Symposium on Choral Music and various international choral competitions and concerts since 2017. She served as the former commissioned composer for the Ansan Municipal Chorus and National Chorus of Korea, and the commissioned composer for the Chuncheon Municipal Chorus, Ulsan Municipal Chorus, Daejeon Municipal Chorus, Yongin Youth Chorus, and Cheongju Municipal Chorus. She also served as the President of the Korean Choral Composition Association (KCCA).",
+                    "Currently, she works as the resident composer for the Incheon City Chorale and serves as a standing director of the KCCA. She has also taught at Hanyang University, Konkuk University, and Kangwon National University. Her accomplishments include the 1992 Chosun Ilbo New Music Competition, the 2009 Korea Creative Choral Festival Composition Award, and various commissioned works for choruses in cities such as Daejeon, Anyang, Ansan, Ulsan, Wonju, Incheon, and Chuncheon."
+                ],
+                compositions: [
+                    {
+                        title: 'Mon-nee-joh [몬니조, Evocation]',
+                        voicing: 'SATB, SSA',
+                        instrumentation: 'Piano',
+                        samplePerformance: [
+                            { label: 'Video 1', url: '#' },
+                            { label: 'Video 2', url: '#' }
+                        ],
+                        otherLinks: [
+                            { label: 'Diction Guide', url: '#' },
+                            { label: 'Publisher Info', url: '#' }
+                        ]
+                    },
+                    {
+                        title: 'Ong Hye Ya [옹혜야]',
+                        voicing: 'SATB',
+                        instrumentation: 'A Cappella',
+                        samplePerformance: [
+                            { label: 'Video', url: '#' }
+                        ],
+                        otherLinks: [
+                            { label: 'Diction Guide', url: '#' },
+                            { label: 'Performance Practice', url: '#' },
+                            { label: 'Publisher Info', url: '#' }
+                        ]
+                    },
+                    {
+                        title: 'Golden Field [금잔디]',
+                        voicing: 'SATB',
+                        instrumentation: 'Piano, Fl, Ob',
+                        samplePerformance: [
+                            { label: 'Video', url: '#' }
+                        ],
+                        otherLinks: [
+                            { label: 'Diction Guide', url: '#' }
+                        ]
+                    },
+                    {
+                        title: 'A Wind in the South [바람은 남쪽]',
+                        voicing: 'SATB',
+                        instrumentation: 'TBD',
+                        samplePerformance: [],
+                        otherLinks: [
+                            { label: 'More Info', url: '#' }
+                        ]
+                    }
+                ]
+            },
+            'kim-dong-jin': {
+                nameEn: 'Kim, Dong-jin',
+                nameKo: '김동진',
+                birthYear: '1913-2009',
+                portraitUrl: '',
+                socialMedia: {
+                    website: '',
+                    instagram: '',
+                    facebook: '',
+                    linkedin: '',
+                    youtube: ''
+                },
+                bio: [
+                    "Known as the father of Korean choral music, Kim Dong-jin was instrumental in establishing the Korean choral tradition. He founded the Seoul Motet Choir and composed over 200 choral works."
+                ],
+                compositions: [
+                    {
+                        title: 'Arirang [아리랑]',
+                        voicing: 'SATB',
+                        instrumentation: 'Piano',
+                        samplePerformance: [],
+                        otherLinks: []
+                    }
+                ]
+            }
+            // ADD MORE COMPOSERS HERE - Copy the structure above
+        };
+
+        // ============================================================
+        // AUTO-GENERATE COMPOSER THUMBNAILS
+        // ============================================================
+        function generateComposerGrid() {
+            const grid = document.getElementById('composer-list');
+            grid.innerHTML = '';
+            
+            Object.keys(composersData).forEach(composerId => {
+                const composer = composersData[composerId];
+                const thumbnail = document.createElement('div');
+                thumbnail.className = 'composer-thumbnail';
+                thumbnail.onclick = () => showComposer(composerId);
+                
+                thumbnail.innerHTML = `
+                    <div class="composer-image">
+                        ${composer.portraitUrl ? `<img src="${composer.portraitUrl}" alt="${composer.nameEn}" style="width: 100%; height: 100%; object-fit: cover;">` : '[Portrait Photo]'}
+                    </div>
+                    <div class="composer-info">
+                        <h3>${composer.nameEn}</h3>
+                        <p class="korean-name">${composer.nameKo}</p>
+                    </div>
+                `;
+                
+                grid.appendChild(thumbnail);
+            });
+        }
+
+        // ============================================================
+        // AUTO-GENERATE COMPOSER DETAIL PAGE
+        // ============================================================
+        function generateComposerDetail(composerId) {
+            const composer = composersData[composerId];
+            if (!composer) return '';
+            
+            // Generate social media icons
+            const socialIcons = {
+                website: '<svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M3.33789 17C5.06694 19.989 8.29866 22 12.0001 22C15.7015 22 18.9332 19.989 20.6622 17" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3.33789 7C5.06694 4.01099 8.29866 2 12.0001 2C15.7015 2 18.9332 4.01099 20.6622 7" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M13 21.9506C13 21.9506 14.4079 20.0966 15.2947 16.9999" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M13 2.04932C13 2.04932 14.4079 3.90328 15.2947 7" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M11 21.9506C11 21.9506 9.59215 20.0966 8.70532 16.9999" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M11 2.04932C11 2.04932 9.59215 3.90328 8.70532 7" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9 10L10.5 15L12 10L13.5 15L15 10" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M1 10L2.5 15L4 10L5.5 15L7 10" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17 10L18.5 15L20 10L21.5 15L23 10" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+                instagram: '<svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16Z" stroke="#000000" stroke-width="1.5"></path><path d="M17.5 6.51L17.51 6.49889" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+                facebook: '<svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M17 2H14C12.6739 2 11.4021 2.52678 10.4645 3.46447C9.52678 4.40215 9 5.67392 9 7V10H6V14H9V22H13V14H16L17 10H13V7C13 6.73478 13.1054 6.48043 13.2929 6.29289C13.4804 6.10536 13.7348 6 14 6H17V2Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+                linkedin: '<svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7 17V13.5V10" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M11 17V13.75M11 10V13.75M11 13.75C11 10 17 10 17 13.75V17" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7 7.01L7.01 6.99889" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+                youtube: '<svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M14 12L10.5 14V10L14 12Z" fill="#000000" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M2 12.7075V11.2924C2 8.39705 2 6.94939 2.90549 6.01792C3.81099 5.08645 5.23656 5.04613 8.08769 4.96549C9.43873 4.92728 10.8188 4.8999 12 4.8999C13.1812 4.8999 14.5613 4.92728 15.9123 4.96549C18.7634 5.04613 20.189 5.08645 21.0945 6.01792C22 6.94939 22 8.39705 22 11.2924V12.7075C22 15.6028 22 17.0505 21.0945 17.9819C20.189 18.9134 18.7635 18.9537 15.9124 19.0344C14.5613 19.0726 13.1812 19.1 12 19.1C10.8188 19.1 9.43867 19.0726 8.0876 19.0344C5.23651 18.9537 3.81097 18.9134 2.90548 17.9819C2 17.0505 2 15.6028 2 12.7075Z" stroke="#000000" stroke-width="1.5"></path></svg>'
+            };
+            
+            let socialHTML = '';
+            Object.keys(composer.socialMedia).forEach(platform => {
+                if (composer.socialMedia[platform]) {
+                    socialHTML += `<a href="${composer.socialMedia[platform]}" class="social-icon" title="${platform.charAt(0).toUpperCase() + platform.slice(1)}">${socialIcons[platform]}</a>`;
+                }
+            });
+            
+            // Generate biography
+            const bioHTML = composer.bio.map(para => `<p>${para}</p>`).join('');
+            
+            // Generate compositions
+            const compositionsHTML = composer.compositions.map(comp => {
+                const performanceLinksHTML = comp.samplePerformance.length > 0 
+                    ? `<div class="performance-links">${comp.samplePerformance.map(link => `<a href="${link.url}" class="performance-link">${link.label}</a>`).join('')}</div>`
+                    : '<span class="meta-value">Coming Soon</span>';
+                
+                const otherLinksHTML = comp.otherLinks.length > 0
+                    ? `<div class="composition-links">${comp.otherLinks.map(link => `<a href="${link.url}" class="comp-link">${link.label}</a>`).join('')}</div>`
+                    : '';
+                
+                return `
+                    <div class="composition-card">
+                        <div class="composition-header">
+                            <h4 class="composition-title">${comp.title}</h4>
+                        </div>
+                        <div class="composition-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Available Voicing</span>
+                                <span class="meta-value">${comp.voicing}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Instrumentation</span>
+                                <span class="meta-value">${comp.instrumentation}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Sample Performance</span>
+                                ${performanceLinksHTML}
+                            </div>
+                        </div>
+                        ${otherLinksHTML}
+                    </div>
+                `;
+            }).join('');
+            
+            return `
+                <button class="back-button" onclick="showComposerList()">← Back to Composers</button>
+                <div class="composer-header">
+                    <div class="composer-portrait">
+                        ${composer.portraitUrl ? `<img src="${composer.portraitUrl}" alt="${composer.nameEn}" style="width: 100%; height: 100%; object-fit: cover;">` : '[Portrait Photo]'}
+                    </div>
+                    <div class="composer-title-section">
+                        <h2>${composer.nameEn} ${composer.nameKo} ${composer.birthYear}</h2>
+                        ${socialHTML ? `<div class="composer-social">${socialHTML}</div>` : ''}
+                        <button class="share-button" onclick="shareComposer()">Share</button>
+                    </div>
+                </div>
+                <div class="composer-bio">
+                    ${bioHTML}
+                </div>
+                <div class="compositions-section">
+                    <h3>Compositions</h3>
+                    <div class="compositions-list">
+                        ${compositionsHTML}
+                    </div>
+                </div>
+            `;
+        }
+
+        // ============================================================
+        // NAVIGATION FUNCTIONS
+        // ============================================================
+        function shareComposer() {
+            const url = window.location.href;
+            
+            // Try to use the native share API if available (mobile devices)
+            if (navigator.share) {
+                navigator.share({
+                    title: document.title,
+                    url: url
+                }).catch(() => {
+                    // If share fails, fall back to copying
+                    copyToClipboard(url);
+                });
+            } else {
+                // Fall back to copying to clipboard
+                copyToClipboard(url);
+            }
+        }
+
+        function copyToClipboard(text) {
+            // Create temporary input element
+            const input = document.createElement('input');
+            input.value = text;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            
+            // Show feedback
+            alert('Page URL copied to clipboard!');
+        }
+
+        function toggleMenu() {
+            const menu = document.querySelector('.nav-menu');
+            const hamburger = document.querySelector('.hamburger');
+            menu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        function showComposer(composerId) {
+            document.getElementById('composer-list').style.display = 'none';
+            
+            // Generate and show composer detail
+            const detailContainer = document.getElementById('composer-detail-container');
+            detailContainer.innerHTML = generateComposerDetail(composerId);
+            detailContainer.style.display = 'block';
+            
+            // Update URL with composer name
+            try {
+                window.history.pushState({composer: composerId}, '', `/korean-choral-compositions/${composerId}`);
+            } catch (e) {
+                // Ignore error for local file testing
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showComposerList() {
+            document.getElementById('composer-detail-container').style.display = 'none';
+            document.getElementById('composer-list').style.display = 'grid';
+            
+            // Update URL back to main page
+            try {
+                window.history.pushState({}, '', '/korean-choral-compositions/');
+            } catch (e) {
+                // Ignore error for local file testing
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', function(event) {
+            if (event.state && event.state.composer) {
+                showComposer(event.state.composer);
+            } else {
+                showComposerList();
+            }
+        });
+
+        // Initialize page on load
+        window.addEventListener('DOMContentLoaded', function() {
+            generateComposerGrid();
+        });
+    </script>
+</body>
+</html>

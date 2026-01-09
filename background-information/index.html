@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Information - Korean Choral Music Archive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+        }
+
+        h1, h2, h3, h4, h5, h6, .nav-menu {
+            font-family: 'Onest', sans-serif;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Header Styles */
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .logo h1 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #000;
+            letter-spacing: -0.5px;
+        }
+
+        .logo p {
+            font-size: 0.75rem;
+            color: #666;
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            margin-top: 0.1rem;
+        }
+
+        /* Navigation Styles */
+        nav {
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            justify-content: flex-start;
+            gap: 3rem;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            color: #1a1a1a;
+            text-decoration: none;
+            padding: 1.2rem 0;
+            display: block;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: -0.3px;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #666;
+        }
+
+        .nav-menu a.active {
+            color: #000;
+            border-bottom: 2px solid #000;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 0.5rem;
+            margin: 0 auto;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #000;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: #000;
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+        }
+
+        /* Layout with Sidebar */
+        .content-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 3rem;
+            padding-bottom: 4rem;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar-nav {
+            position: sticky;
+            top: 140px;
+            height: fit-content;
+        }
+
+        .sidebar-nav h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar-nav ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-nav ul li a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: block;
+            padding: 0.5rem 0;
+            border-left: 2px solid transparent;
+            padding-left: 1rem;
+            transition: all 0.3s;
+        }
+
+        .sidebar-nav ul li a:hover {
+            color: #000;
+            border-left-color: #000;
+        }
+
+        .sidebar-nav ul li a.active {
+            color: #000;
+            border-left-color: #000;
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 900px;
+        }
+
+        /* Section Styles */
+        .content-section {
+            margin-bottom: 4rem;
+            scroll-margin-top: 100px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .section-intro {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        /* Expandable Card Styles */
+        .expandable-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .expandable-card {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            transition: border-color 0.3s;
+        }
+
+        .expandable-card.expanded {
+            border-color: #000;
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .card-header:hover {
+            background: #f5f5f5;
+        }
+
+        .card-header-content h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.3px;
+        }
+
+        .card-header-content p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .expand-icon {
+            font-size: 1.5rem;
+            color: #666;
+            transition: transform 0.3s;
+        }
+
+        .expandable-card.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .card-content {
+            display: none;
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .expandable-card.expanded .card-content {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-media {
+            width: 100%;
+            max-width: 400px;
+            height: 250px;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-style: italic;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            margin: 1rem 0;
+            border: 1px solid #d0d0d0;
+        }
+
+        .card-media:hover {
+            opacity: 0.8;
+        }
+
+        .definition-box {
+            background: white;
+            border-left: 3px solid #000;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .card-content p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        /* Research Papers Section */
+        .search-box {
+            margin-bottom: 2rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 1px solid #d0d0d0;
+            font-size: 0.95rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #000;
+        }
+
+        .paper-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .paper-item {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            padding: 1.5rem;
+            transition: border-color 0.3s;
+        }
+
+        .paper-item:hover {
+            border-color: #000;
+        }
+
+        .paper-item h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.3px;
+        }
+
+        .paper-meta {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.8rem;
+        }
+
+        .paper-item p {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .paper-link {
+            display: inline-block;
+            color: #000;
+            text-decoration: none;
+            font-family: 'Onest', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 0.4rem 1rem;
+            border: 2px solid #000;
+            transition: all 0.3s;
+        }
+
+        .paper-link:hover {
+            background: #000;
+            color: white;
+        }
+
+        /* Video Section */
+        .video-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .video-item {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            padding: 1.5rem;
+        }
+
+        .video-embed {
+            width: 100%;
+            height: 350px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            margin-bottom: 1rem;
+            border: 1px solid #d0d0d0;
+        }
+
+        .video-item h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.3px;
+        }
+
+        .video-item p {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: #1a1a1a;
+            color: #ccc;
+            padding: 2.5rem 0;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-content p {
+            margin: 0.3rem 0;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 30px;
+            }
+
+            .content-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar-nav {
+                position: relative;
+                top: 0;
+                background: #fafafa;
+                padding: 1rem;
+                border: 1px solid #e0e0e0;
+                margin-bottom: 2rem;
+            }
+
+            .sidebar-nav ul {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .sidebar-nav ul li a {
+                border-left: none;
+                border-bottom: 2px solid transparent;
+                padding: 0.5rem 1rem;
+            }
+
+            .sidebar-nav ul li a.active,
+            .sidebar-nav ul li a:hover {
+                border-left: none;
+                border-bottom-color: #000;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .header-top {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            /* Hamburger Menu for Mobile */
+            nav {
+                border-top: none;
+            }
+
+            nav .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                gap: 0;
+                background: #fafafa;
+                border: 1px solid #e0e0e0;
+                margin-top: 0.5rem;
+                text-align: center;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu li {
+                width: 100%;
+            }
+
+            .nav-menu a {
+                padding: 1rem;
+                border-bottom: 1px solid #e0e0e0;
+            }
+
+            .nav-menu li:last-child a {
+                border-bottom: none;
+            }
+
+            .nav-menu a.active {
+                border-bottom: 1px solid #e0e0e0;
+                background: #f0f0f0;
+            }
+
+            .nav-menu li:last-child a.active {
+                border-bottom: none;
+            }
+
+            .page-header h2 {
+                font-size: 2rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .card-media,
+            .video-embed {
+                height: 200px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <a href="/" class="logo">
+                    <div class="logo-icon">KCM</div>
+                    <div>
+                        <h1>Korean Choral Music Archive</h1>
+                        <p>operated by stevekomusic.com</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <div class="hamburger" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/background-information/" class="active">Background Information</a></li>
+                    <li><a href="/korean-choral-compositions/">Korean Choral Compositions</a></li>
+                    <li><a href="/send-your-inquiry/">Send Your Inquiry</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h2>Background Information</h2>
+                <p>Essential cultural context for understanding and performing Korean choral music</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="content-layout">
+                <!-- Sidebar Navigation -->
+                <aside class="sidebar-nav">
+                    <h3>On This Page</h3>
+                    <ul>
+                        <li><a href="#spirits" onclick="setActive(event)">Three Korean Spirits</a></li>
+                        <li><a href="#ornamentations" onclick="setActive(event)">Korean Ornamentations</a></li>
+                        <li><a href="#research" onclick="setActive(event)">Research Papers</a></li>
+                        <li><a href="#history" onclick="setActive(event)">Brief Korean History</a></li>
+                    </ul>
+                </aside>
+
+                <!-- Main Content -->
+                <div class="main-content">
+                    <!-- Three Korean Spirits -->
+                    <section id="spirits" class="content-section">
+                        <h2 class="section-title">Three Korean Spirits</h2>
+                        <p class="section-intro">Understanding these emotional concepts is essential for authentic interpretation of Korean choral music. Click each to learn more.</p>
+                        
+                        <div class="expandable-grid">
+                            <!-- Heung -->
+                            <div class="expandable-card" onclick="toggleCard(this)">
+                                <div class="card-header">
+                                    <div class="card-header-content">
+                                        <h3>흥 [hɯŋ, Heung]</h3>
+                                        <p>The spirit of collective joy and ecstasy in Korean culture</p>
+                                    </div>
+                                    <span class="expand-icon">▼</span>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-media" onclick="event.stopPropagation(); alert('Video player: Traditional agricultural village festival')">
+                                        [Click to watch: Traditional Festival]
+                                    </div>
+                                    <div class="definition-box">
+                                        <strong>흥:</strong> 재미나 즐거움을 일어나게 하는 감정<br>
+                                        <em>An emotion or sensation which causes joy or fun</em>
+                                    </div>
+                                    <p>Ju Hyun Lee and Myung Hee Lee at Dongseo University defined Heung as a status of ecstasy with joy and fun. They note that Heung is contagious—a shared emotional experience.</p>
+                                    <p>This Heung underlies every type of Korean traditional performing arts such as folk songs, mask dance, and pan-so-ri. It's based more on the person experiencing the emotion rather than the object causing it.</p>
+                                    <p>Heung possibly emerged from Korea's long agricultural history, which developed a relation-based society. This spirit dominates other emotions in Korean people—even when sad, Koreans often dance and sing as a way to vent their feelings.</p>
+                                </div>
+                            </div>
+
+                            <!-- Han -->
+                            <div class="expandable-card" onclick="toggleCard(this)">
+                                <div class="card-header">
+                                    <div class="card-header-content">
+                                        <h3>한 [hɑn, Han]</h3>
+                                        <p>Deep sorrow, longing, and the dignified acceptance of loss</p>
+                                    </div>
+                                    <span class="expand-icon">▼</span>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-media" onclick="event.stopPropagation(); alert('Video player: Sal-pu-ri dance demonstration')">
+                                        [Click to watch: Sal-pu-ri Dance]
+                                    </div>
+                                    <div class="definition-box">
+                                        <strong>한:</strong> 몹시 원망스럽고 억울하거나 안타깝고 슬퍼 응어리진 마음<br>
+                                        <em>A heart with sadness, resentment, and/or chagrin</em>
+                                    </div>
+                                    <p>According to Professor Insik Kim of Chung Ang University, Han includes feelings of loss. It is a state after grieving—the loss of a lover, country, or deeply cherished ideal.</p>
+                                    <p>Han is a spirit of combined emotions: grieving and digesting all sorrow, oppression, longing, and missing someone. While this emotion existed throughout Korean history, it became widely shared during the 20th century through Japanese occupation, liberation, and the division of Korea.</p>
+                                    <p>This shared spirit of Han works as a spiritual bond among Korean people, creating deep emotional resonance in their music.</p>
+                                </div>
+                            </div>
+
+                            <!-- Jeong -->
+                            <div class="expandable-card" onclick="toggleCard(this)">
+                                <div class="card-header">
+                                    <div class="card-header-content">
+                                        <h3>정 [tɕʌŋ, Jeong]</h3>
+                                        <p>Deep affection, care, and the spirit of sharing with others</p>
+                                    </div>
+                                    <span class="expand-icon">▼</span>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-media" onclick="event.stopPropagation(); alert('Video player: Examples of Jeong in Korean culture')">
+                                        [Click to watch: Jeong in Practice]
+                                    </div>
+                                    <div class="definition-box">
+                                        <strong>정:</strong> 사랑이나 친근감을 느끼는 마음<br>
+                                        <em>A heart of friendliness or love</em>
+                                    </div>
+                                    <p>Korean people share food, drink, gifts, joy, and even pain. An old Korean proverb says: "If you share the joy, the joy becomes twice. If you share the hurt, hurt becomes half."</p>
+                                    <p>This ongoing spirit of care for others is remarkably similar to the Biblical verse "thou shalt love thy neighbour as thyself" from Leviticus—though Korea did not widely accept Christianity until the early 20th century.</p>
+                                    <p>However, this Jeong is rapidly disappearing due to industrialization, urbanization, and growing individualism in modern Korean society.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Four Korean Ornamentations -->
+                    <section id="ornamentations" class="content-section">
+                        <h2 class="section-title">Korean Vocal Ornamentations</h2>
+                        <p class="section-intro">These distinctive vocal techniques (sigimsae) define Korean traditional singing. Click each to hear examples and learn proper execution.</p>
+                        
+                        <div class="expandable-grid">
+                            <!-- Pyeong-eum -->
+                            <div class="expandable-card" onclick="toggleCard(this)">
+                                <div class="card-header">
+                                    <div class="card-header-content">
+                                        <h3>평음/평목 [Pyeong-eum/Pyeong-Mok]</h3>
+                                        <p>Straight Tone - Purer than Western classical straight tone</p>
+                                    </div>
+                                    <span class="expand-icon">▼</span>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-media" onclick="event.stopPropagation(); alert('Audio player: Pyeong-eum example')">
+                                        [Click to hear example]
+                                    </div>
+                                    <p>In Korean traditional music, eum (voice, tone, pitch) and mok (meaning neck or throat) are interchangeable words. 평음 is a straight long tone.</p>
+                                    <p>This straight tone is straighter than the straight tone in Western vocal music—it has minimal vibrato and represents purity of sound in Korean aesthetic.</p>
+                                </div>
+                            </div>
+
+                            <!-- Tteo-neun-eum -->
+                            <div class="expandable-card" onclick="toggleCard(this)">
+                                <div class="card-header">
+                                    <div class="card-header-content">
+                                        <h3>떠는음/떠는목 [Tteo-neun-eum/Tteo-neun-mok]</h3>
+                                        <p>Vibrated/Shaken Tone - Accelerating oscillation from below pitch center</p>
+                                    </div>
+                                    <span class="expand-icon">▼</span>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-media" onclick="event.stopPropagation(); alert('Audio player: Tteo-neun-eum example')">
+                                        [Click to hear example]
+                                    </div>
+                                    <p>This technique produces tones with vibration or a shaken quality. The vibration range is usually from under the center of the pitch to the center of the pitch.</p>
+                                    <p>It typically starts slow and becomes faster and faster, creating an intensifying emotional effect in the phrase.</p>
+                                </div>
+                            </div>
+
+                            <!-- Kkeok-neun-eum -->
+                            <div class="expandable-card" onclick="toggleCard(this)">
+                                <div class="card-header">
+                                    <div class="card-header-content">
+                                        <h3>꺾는음/꺾는목 [Kkeok-neun-eum/Kkeok-neun-mok]</h3>
+                                        <p>Bending Tone - Quick pitch bend expressing emotional inflection</p>
+                                    </div>
+                                    <span class="expand-icon">▼</span>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-media" onclick="event.stopPropagation(); alert('Audio player: Kkeok-neun-eum example')">
+                                        [Click to hear example]
+                                    </div>
+                                    <p>Kkeokneun sori (꺾는 소리) is one of the most distinctive and expressive types of sigimsae in Korean traditional singing. It involves making a quick bend upward or downward from a main pitch and then returning, creating a subtle yet emotionally charged inflection.</p>
+                                    <p>This technique adds a dynamic, ornamental layer to the melody, allowing the singer to express a wide range of emotions—joy, longing, or sorrow—with just a single note. Unlike simple pitch bending in Western music, kkeokneun sori is closely tied to rhythm and phrasing, often placed at key melodic points to shape the flow of the entire line.</p>
+                                </div>
+                            </div>
+
+                            <!-- Heu-reu-neun-eum -->
+                            <div class="expandable-card" onclick="toggleCard(this)">
+                                <div class="card-header">
+                                    <div class="card-header-content">
+                                        <h3>흐르는음 [Heu-reu-neun-eum]</h3>
+                                        <p>Falling Tone - Smooth downward slide conveying release and closure</p>
+                                    </div>
+                                    <span class="expand-icon">▼</span>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-media" onclick="event.stopPropagation(); alert('Audio player: Heu-reu-neun-eum example')">
+                                        [Click to hear example]
+                                    </div>
+                                    <p>흐르는음 [heu-reu-neun-eum] is a vocal technique in which the singer smoothly slides from a higher note down to a lower one. This gentle downward motion creates a flowing and expressive sound, often filled with emotion.</p>
+                                    <p>It is commonly used to convey a sense of release, longing, or closure at the end of a musical phrase. In pansori, this technique plays an important role in softening the musical line and leaving a lingering emotional effect.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Research Papers -->
+                    <section id="research" class="content-section">
+                        <h2 class="section-title">Research Papers</h2>
+                        <p class="section-intro">Academic research on Korean choral music, performance practice, and cultural context.</p>
+                        
+                        <div class="search-box">
+                            <input type="text" placeholder="Search papers by title, author, or keyword..." onkeyup="searchPapers(this.value)">
+                        </div>
+
+                        <div class="paper-list" id="paper-list">
+                            <div class="paper-item" data-keywords="evolution development history contemporary">
+                                <h3>The Evolution of Korean Choral Music: From Traditional Roots to Contemporary Expression</h3>
+                                <p class="paper-meta">Dr. Kim Sung-hee | Seoul National University | 2021</p>
+                                <p>Examines the development of Korean choral music from its origins in traditional folk songs to its current state as a sophisticated art form. Analyzes how Korean composers have integrated indigenous musical elements with Western choral techniques.</p>
+                                <a href="#" class="paper-link">Read Paper</a>
+                            </div>
+
+                            <div class="paper-item" data-keywords="women female composers gender feminism composition">
+                                <h3>Female Dominance in Korean Choral Composition: A Historical Analysis</h3>
+                                <p class="paper-meta">Dr. Steve Ko | University of Texas at Austin | 2023</p>
+                                <p>Examines why Korean choral music composition became a female-dominated field without a formal feminism movement. Traces historical, cultural, and social factors that led to this unique phenomenon.</p>
+                                <a href="#" class="paper-link">Read Paper</a>
+                            </div>
+
+                            <div class="paper-item" data-keywords="pedagogy teaching education choir choral">
+                                <h3>Teaching Korean Choral Repertoire in American Universities</h3>
+                                <p class="paper-meta">Prof. Choi Min-jung | Ewha Womans University | 2020</p>
+                                <p>Practical strategies for introducing Korean choral music to American choral programs. Includes repertoire suggestions, pronunciation teaching methods, and cultural sensitivity guidelines.</p>
+                                <a href="#" class="paper-link">Read Paper</a>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Brief Korean History -->
+                    <section id="history" class="content-section">
+                        <h2 class="section-title">Brief Korean History</h2>
+                        <p class="section-intro">Understanding Korean history is essential for grasping the emotional depth and cultural context of Korean choral music.</p>
+                        
+                        <div class="video-list">
+                            <div class="video-item">
+                                <div class="video-embed">
+                                    [YouTube Video: Full History of Korea in 5 Minutes]
+                                </div>
+                                <h3>Full History of Korea in 5 Minutes</h3>
+                                <p>This video explains Korean history in 5 minutes, providing essential background for non-Koreans to understand the cultural context of Korean choral music.</p>
+                            </div>
+
+                            <div class="video-item">
+                                <div class="video-embed">
+                                    [YouTube Video: History of North and South Korea]
+                                </div>
+                                <h3>History of North and South Korea</h3>
+                                <p>This video explains 20th century Korean history, including why the Korean peninsula was split into North and South. Understanding this history is crucial for interpreting the emotional depth of Korean choral music, particularly the concept of Han (deep sorrow/longing).</p>
+                            </div>
+
+                            <div class="video-item">
+                                <div class="video-embed">
+                                    [YouTube Video: Korean Choral Music Composition]
+                                </div>
+                                <h3>Korean Choral Music Composition: Female Dominant Field without Feminism Movement</h3>
+                                <p>Capstone presentation by Steve Ko, DMA in Choral Conducting from the University of Texas at Austin. Explains why Korean choral music composition became female-dominated without a feminism movement and introduces five prominent female composers including Hyowon Woo and Byunghee Oh, whose works are published in the USA.</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <p>&copy; 2024 Website Copyright reserved to stevekomusic.com</p>
+                    <p>koreanchoralmusic.com</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                    <a href="/send-your-inquiry/">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle hamburger menu
+        function toggleMenu() {
+            const menu = document.querySelector('.nav-menu');
+            const hamburger = document.querySelector('.hamburger');
+            menu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        // Toggle expandable cards
+        function toggleCard(card) {
+            card.classList.toggle('expanded');
+        }
+
+        // Sidebar active state
+        function setActive(event) {
+            event.preventDefault();
+            const links = document.querySelectorAll('.sidebar-nav a');
+            links.forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const targetId = event.target.getAttribute('href');
+            document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Search papers
+        function searchPapers(query) {
+            const papers = document.querySelectorAll('.paper-item');
+            const searchLower = query.toLowerCase();
+            
+            papers.forEach(paper => {
+                const title = paper.querySelector('h3').textContent.toLowerCase();
+                const meta = paper.querySelector('.paper-meta').textContent.toLowerCase();
+                const description = paper.querySelector('p:not(.paper-meta)').textContent.toLowerCase();
+                const keywords = paper.getAttribute('data-keywords').toLowerCase();
+                
+                if (title.includes(searchLower) || 
+                    meta.includes(searchLower) || 
+                    description.includes(searchLower) || 
+                    keywords.includes(searchLower)) {
+                    paper.style.display = 'block';
+                } else {
+                    paper.style.display = 'none';
+                }
+            });
+        }
+
+        // Highlight active section in sidebar on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.content-section');
+            const navLinks = document.querySelectorAll('.sidebar-nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>">Read Paper</a>
+                            </div>
+
+                            <div class="paper-item" data-keywords="han heung emotion emotional performance practice">
+                                <h3>Han and Heung: Emotional Foundations in Korean Choral Compositions</h3>
+                                <p class="paper-meta">Prof. Lee Myung-jin | Yonsei University | 2019</p>
+                                <p>Explores how the distinctly Korean emotions of Han (deep sorrow) and Heung (collective joy) are expressed through choral music. Provides performance practice guidelines for non-Korean conductors.</p>
+                                <a href="#" class="paper-link">Read Paper</a>
+                            </div>
+
+                            <div class="paper-item" data-keywords="pronunciation diction language IPA phonetics">
+                                <h3>Pronunciation and Diction in Korean Choral Music: A Guide for International Performers</h3>
+                                <p class="paper-meta">Dr. Park Ji-won | Korea National University of Arts | 2022</p>
+                                <p>A practical guide addressing Korean language pronunciation challenges in choral settings. Includes IPA transcriptions, audio examples, and common pitfalls for English-speaking choirs.</p>
+                                <a href="#" class="paper-link
